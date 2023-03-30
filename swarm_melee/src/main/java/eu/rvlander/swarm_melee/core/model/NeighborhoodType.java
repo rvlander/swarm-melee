@@ -1,6 +1,6 @@
 package eu.rvlander.swarm_melee.core.model;
 
-public enum ObstacleType {
+public enum NeighborhoodType {
     NONE,
     WALL,
     OUTSIDE
