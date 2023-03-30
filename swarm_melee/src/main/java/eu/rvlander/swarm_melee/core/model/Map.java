@@ -3,6 +3,6 @@ package eu.rvlander.swarm_melee.core.model;
 public interface Map {
     public Point getBottomLeft();
     public Point getTopRight();
-    public boolean isInside(Point point);
-    public ObstacleType get(Point point);
+    public NeighborhoodType get(Point point);
+    Iterator<NeighborhoodType> iterator();
 }
