@@ -6,4 +6,6 @@ public interface World {
     public Map getMap();
     public List<Cursor> getCursors();
     public List<Fighter> getFighters();
+    public Cursor getCursor(Team team);
+    public PositionLookup lookupPosition();
 }
