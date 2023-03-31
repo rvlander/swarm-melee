@@ -5,4 +5,5 @@ public interface Movement {
 
     public int getDeltaX(); 
     public int getDeltaY();
+    public Point applyTo(Point point);
 }

@@ -30,7 +30,7 @@ public class Simulation {
         movementCalculators = new HashMap<>();
         for(Cursor cursor: world.getCursors()){
             ShortestPathCalculator movementCalculator = factory.createFighterMovementCalculator(
-                world.getMap(), cursor);
+                world.getMap(), cursor.getPosition());
             movementCalculators.put(cursor, movementCalculator);
         }
     }
