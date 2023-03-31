@@ -6,15 +6,16 @@ import java.util.Map;
 import eu.rvlander.swarm_melee.core.model.Cursor;
 import eu.rvlander.swarm_melee.core.model.Fighter;
 import eu.rvlander.swarm_melee.core.model.Movement;
-import eu.rvlander.swarm_melee.core.model.Point;
 import eu.rvlander.swarm_melee.core.model.PositionLookup;
 import eu.rvlander.swarm_melee.core.model.Team;
 import eu.rvlander.swarm_melee.core.model.World;
+import eu.rvlander.swarm_melee.utils.Point;
 
 public class Simulation {
-    public final SimulationFactory factory;
-    public World world;
-    public Map<Cursor, ShortestPathCalculator> movementCalculators;
+    private final SimulationFactory factory;
+    private World world;
+    private Map<Cursor, PositionsRanker> positionsRankers;
+    private PositionsGenerator positionsGenerator;
 
     public Simulation(SimulationFactory simulationFactory) {
         this.factory = simulationFactory;
@@ -23,15 +24,16 @@ public class Simulation {
 
     public void reinitialize() {
         world = factory.createWorld();
-        initializeMovementCalculators();
+        positionsGenerator = factory.createPositionsGenerator();
+        initializePositionsRankers();
     }
 
-    private void initializeMovementCalculators() {
-        movementCalculators = new HashMap<>();
+    private void initializePositionsRankers() {
+        positionsRankers = new HashMap<>();
         for(Cursor cursor: world.getCursors()){
-            ShortestPathCalculator movementCalculator = factory.createFighterMovementCalculator(
+            PositionsRanker positionRanker = factory.createPositionsRanker(
                 world.getMap(), cursor.getPosition());
-            movementCalculators.put(cursor, movementCalculator);
+            positionsRankers.put(cursor, positionRanker);
         }
     }
 
@@ -40,12 +42,37 @@ public class Simulation {
             Team team = fighter.getTeam();
             Cursor cursor = world.getCursor(team);
             Point fighterPosition = fighter.getPosition();
-            ShortestPathCalculator movementCalculator = movementCalculators.get(cursor);
-            Movement proposedMovement = movementCalculator.computeMovement(fighterPosition, cursor.getPosition());
-            Point prospectivePosition = proposedMovement.applyTo(fighterPosition);
-
-            // CONTINUE HERE
+            Point cursorPosition = cursor.getPosition();
+            
+            PositionsList possiblePositions = positionsGenerator.generatePossiblePositions(fighterPosition);
+            PositionsRanker positionRanker = positionsRankers.get(cursor);
+            RankedPositions rankedPositions = positionRanker.rank(fighterPosition, cursorPosition, possiblePositions);
+       
+            Point pickedPosition = pickMove(fighter, rankedPositions);
+            makeMove(fighter, pickedPosition);
         }
         
+    }
+
+    private Point pickMove(Fighter f, RankedPositions rankedPositions) {
+        // TODO
+        throw new UnsupportedOperationException("Unimplemented method 'rank'");
+    }
+
+    private void makeMove(Fighter fighter, Point target) {
+        PositionLookup lookup = this.world.lookupPosition(target);
+        switch (lookup.type) {
+            case EMPTY:
+                fighter.moveTo(target);
+                break;
+            case FIGHTER:
+                handleFighterInteraction(fighter, lookup.getFighter());
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void handleFighterInteraction(Fighter movingfighter, Fighter standingFighter) {
     }
 }

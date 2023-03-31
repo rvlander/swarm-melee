@@ -32,6 +32,11 @@ public class PositionLookup {
         return fighter != null || type != Type.FIGHTER;
     }
 
+    public Fighter getFighter() {
+        assert type == Type.FIGHTER;
+        return fighter;
+    }
+
     public enum Type {
         EMPTY,
         FORBIDDEN,
