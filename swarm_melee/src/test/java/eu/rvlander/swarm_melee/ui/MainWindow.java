@@ -1,83 +1,59 @@
 package eu.rvlander.swarm_melee.ui;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 
 import eu.rvlander.swarm_melee.core.model.Fighter;
 import eu.rvlander.swarm_melee.core.model.World;
-import eu.rvlander.swarm_melee.ui.awt.AwtMovement;
 import eu.rvlander.swarm_melee.ui.awt.AwtWorld;
+import eu.rvlander.swarm_melee.utils.Point;
 
 public class MainWindow extends JFrame {
 
+    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    private final World world;
+
     public MainWindow(final World w) {
         super("Swarm Melee V1.0");
-        setSize(w.getMap().getTopRight().getX(), w.getMap().getBottomLeft().getY());
+        this.world = w;
+        setSize(this.world.getMap().getTopRight().getX(), this.world.getMap().getBottomLeft().getY());
         setLocationRelativeTo(null);
-        add(((AwtWorld)w));
+        add(((AwtWorld)this.world));
 
-        final KeyListener k = new KeyListener() {
+        addKeyListener(new PlayerKeyListener(this.world));
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
 
-            @Override
-            public void keyTyped(KeyEvent e) {
-                // nothing to do
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                //update cursor and repaint
-                switch (e.getKeyCode()) {
-                    case KeyEvent.VK_UP:
-                        w.getCursors().get(0).movePosition(new AwtMovement(0, -10));
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        w.getCursors().get(0).movePosition(new AwtMovement(0, 10));
-                        break;
-                    case KeyEvent.VK_LEFT:
-                        w.getCursors().get(0).movePosition(new AwtMovement(-10, 0));
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                        w.getCursors().get(0).movePosition(new AwtMovement(10, 0));
-                        break;
-                    case KeyEvent.VK_Z:
-                        w.getCursors().get(1).movePosition(new AwtMovement(0, -10));
-                        break;
-                    case KeyEvent.VK_S:
-                        w.getCursors().get(1).movePosition(new AwtMovement(0, 10));
-                        break;
-                    case KeyEvent.VK_Q:
-                        w.getCursors().get(1).movePosition(new AwtMovement(-10, 0));
-                        break;
-                    case KeyEvent.VK_D:
-                        w.getCursors().get(1).movePosition(new AwtMovement(10, 0));
-                        break;    
-                    default:
-                        break;
-                }
-                updateFighters(w);
-                refresh();
-            }
+        final Runnable repaintTimmer = new Runnable() {
 
             @Override
-            public void keyReleased(KeyEvent e) {
+            public void run() {
                 refresh();
             }
             
         };
-        addKeyListener(k);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
+        scheduler.scheduleAtFixedRate(repaintTimmer, 0, 120, TimeUnit.MILLISECONDS);
     }
 
     private void updateFighters(final World w) {
-        for(final Fighter f : w.getFighters()) {
-            w.getCursor(f.getTeam()).getPosition();
+        for(final Fighter f : this.world.getFighters()) {
+            final Point teamCursorPosition = w.getCursor(f.getTeam()).getPosition();
+            final int randX = getRandomInt(-300, 300);
+            final int randY = getRandomInt(-300, 300);
+            f.moveTo(new Point(teamCursorPosition.getX() + randX, teamCursorPosition.getY() + randY));
         }
+    }
+
+    private int getRandomInt(final int min, final int max) {
+        return new Random().nextInt(max - (min) + 1) + (min);
     }
 
     private void refresh() {
         repaint();
+        updateFighters(this.world);
     }
 }
