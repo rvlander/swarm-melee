@@ -2,8 +2,8 @@ package eu.rvlander.swarm_melee.ui.awt;
 
 import eu.rvlander.swarm_melee.core.model.Cursor;
 import eu.rvlander.swarm_melee.core.model.Movement;
-import eu.rvlander.swarm_melee.core.model.Point;
 import eu.rvlander.swarm_melee.core.model.Team;
+import eu.rvlander.swarm_melee.utils.Point;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

@@ -7,9 +7,9 @@ import java.util.List;
 import eu.rvlander.swarm_melee.core.model.Cursor;
 import eu.rvlander.swarm_melee.core.model.Fighter;
 import eu.rvlander.swarm_melee.core.model.Map;
-import eu.rvlander.swarm_melee.core.model.Point;
 import eu.rvlander.swarm_melee.core.model.World;
 import eu.rvlander.swarm_melee.ui.awt.*;
+import eu.rvlander.swarm_melee.utils.Point;
 
 public class TestUI {
     public static void main(String[] args) throws Exception {

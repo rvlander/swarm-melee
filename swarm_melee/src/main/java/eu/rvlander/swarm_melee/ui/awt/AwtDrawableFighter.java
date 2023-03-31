@@ -8,8 +8,8 @@ import java.awt.Rectangle;
 
 import eu.rvlander.swarm_melee.core.model.Fighter;
 import eu.rvlander.swarm_melee.core.model.Movement;
-import eu.rvlander.swarm_melee.core.model.Point;
 import eu.rvlander.swarm_melee.core.model.Team;
+import eu.rvlander.swarm_melee.utils.Point;
 
 public class AwtDrawableFighter implements Fighter {
 
@@ -65,6 +65,12 @@ public class AwtDrawableFighter implements Fighter {
     @Override
     public void setTeam(Team t) {
         this.team = (AwtTeam)t;
+    }
+
+    @Override
+    public void moveTo(Point target) {
+        this.x = target.getX();
+        this.y = target.getY();
     }
     
 }

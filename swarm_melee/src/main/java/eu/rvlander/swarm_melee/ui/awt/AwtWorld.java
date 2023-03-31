@@ -6,6 +6,7 @@ import eu.rvlander.swarm_melee.core.model.Map;
 import eu.rvlander.swarm_melee.core.model.PositionLookup;
 import eu.rvlander.swarm_melee.core.model.Team;
 import eu.rvlander.swarm_melee.core.model.World;
+import eu.rvlander.swarm_melee.utils.Point;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -65,7 +66,7 @@ public class AwtWorld extends JComponent implements World {
     }
 
     @Override
-    public PositionLookup lookupPosition() {
+    public PositionLookup lookupPosition(Point position) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'lookupPosition'");
     }

@@ -1,4 +1,4 @@
-package eu.rvlander.swarm_melee.core.model;
+package eu.rvlander.swarm_melee.utils;
 
 public class Point {
     private int x;

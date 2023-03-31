@@ -1,6 +1,7 @@
 package eu.rvlander.swarm_melee.ui.awt;
 
 import eu.rvlander.swarm_melee.core.model.Movement;
+import eu.rvlander.swarm_melee.utils.Point;
 
 public class AwtMovement implements Movement {
 
@@ -25,6 +26,12 @@ public class AwtMovement implements Movement {
     @Override
     public int getDeltaY() {
         return this.dy;
+    }
+
+    @Override
+    public Point applyTo(Point point) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'applyTo'");
     }
     
 }
