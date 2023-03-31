@@ -7,6 +7,8 @@ import eu.rvlander.swarm_melee.core.model.Cursor;
 import eu.rvlander.swarm_melee.core.model.Fighter;
 import eu.rvlander.swarm_melee.core.model.Map;
 import eu.rvlander.swarm_melee.core.model.Point;
+import eu.rvlander.swarm_melee.core.model.PositionLookup;
+import eu.rvlander.swarm_melee.core.model.Team;
 import eu.rvlander.swarm_melee.core.model.World;
 
 public class TestWorld implements World {
@@ -29,6 +31,18 @@ public class TestWorld implements World {
     public List<Fighter> getFighters() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getFighters'");
+    }
+
+    @Override
+    public Cursor getCursor(Team team) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getCursor'");
+    }
+
+    @Override
+    public PositionLookup lookupPosition() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'lookupPosition'");
     }
     
 }

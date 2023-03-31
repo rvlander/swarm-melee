@@ -14,12 +14,6 @@ public class FighterForTest implements Fighter {
     }
 
     @Override
-    public void movePosition(Movement mov) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'movePosition'");
-    }
-
-    @Override
     public void decreaseHealth() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'decreaseHealth'");
@@ -41,6 +35,12 @@ public class FighterForTest implements Fighter {
     public void setTeam(Team team) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setTeam'");
+    }
+
+    @Override
+    public void move(Movement mov) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'move'");
     }
     
 }
