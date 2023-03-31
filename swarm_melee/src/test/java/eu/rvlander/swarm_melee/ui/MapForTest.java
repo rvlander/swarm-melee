@@ -4,8 +4,8 @@ import java.util.Iterator;
 
 import eu.rvlander.swarm_melee.core.model.Map;
 import eu.rvlander.swarm_melee.core.model.NeighborhoodType;
-import eu.rvlander.swarm_melee.core.model.Point;
 import eu.rvlander.swarm_melee.utils.Pair;
+import eu.rvlander.swarm_melee.utils.Point;
 
 public class MapForTest implements Map {
 

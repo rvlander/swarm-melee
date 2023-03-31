@@ -10,15 +10,15 @@ public class Grid<T> {
     public Grid(int width, int height) {
         this.width = width;
         this.height = height; 
-        initializeGrid();
+        // initializeGrid();
     }
 
-    public void initializeGrid(()->T creator) {
-        map = (T[])new Object[width*height];
-        for(int i = 0; i < map.length; i++) {
-            map[i] = creator();
-        }
-    }
+    // public void initializeGrid(()->T creator) {
+    //     map = (T[])new Object[width*height];
+    //     for(int i = 0; i < map.length; i++) {
+    //         map[i] = creator();
+    //     }
+    // }
 
     public T get(Point point) {
         assert isInBounds(point);
