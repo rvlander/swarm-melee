@@ -5,20 +5,18 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 
+import eu.rvlander.swarm_melee.core.model.Fighter;
 import eu.rvlander.swarm_melee.core.model.World;
-import eu.rvlander.swarm_melee.ui.awt.AwtDrawableCursor;
 import eu.rvlander.swarm_melee.ui.awt.AwtMovement;
+import eu.rvlander.swarm_melee.ui.awt.AwtWorld;
 
 public class MainWindow extends JFrame {
 
-    private final World w;
     public MainWindow(final World w) {
         super("Swarm Melee V1.0");
-        this.w = w;
-        setSize(this.w.getMap().getTopRight().getX(), this.w.getMap().getBottomLeft().getY());
+        setSize(w.getMap().getTopRight().getX(), w.getMap().getBottomLeft().getY());
         setLocationRelativeTo(null);
-        final AwtDrawableCursor c1 = new AwtDrawableCursor(this.w.getCursors().get(0));
-        add(c1);
+        add(((AwtWorld)w));
 
         final KeyListener k = new KeyListener() {
 
@@ -43,9 +41,22 @@ public class MainWindow extends JFrame {
                     case KeyEvent.VK_RIGHT:
                         w.getCursors().get(0).movePosition(new AwtMovement(10, 0));
                         break;
+                    case KeyEvent.VK_Z:
+                        w.getCursors().get(1).movePosition(new AwtMovement(0, -10));
+                        break;
+                    case KeyEvent.VK_S:
+                        w.getCursors().get(1).movePosition(new AwtMovement(0, 10));
+                        break;
+                    case KeyEvent.VK_Q:
+                        w.getCursors().get(1).movePosition(new AwtMovement(-10, 0));
+                        break;
+                    case KeyEvent.VK_D:
+                        w.getCursors().get(1).movePosition(new AwtMovement(10, 0));
+                        break;    
                     default:
                         break;
                 }
+                updateFighters(w);
                 refresh();
             }
 
@@ -60,7 +71,13 @@ public class MainWindow extends JFrame {
         setVisible(true);
     }
 
-    public void refresh() {
+    private void updateFighters(final World w) {
+        for(final Fighter f : w.getFighters()) {
+            w.getCursor(f.getTeam()).getPosition();
+        }
+    }
+
+    private void refresh() {
         repaint();
     }
 }

@@ -1,31 +1,33 @@
 package eu.rvlander.swarm_melee.ui.awt;
 
-import eu.rvlander.swarm_melee.core.model.Cursor;
-import eu.rvlander.swarm_melee.core.model.Movement;
-import eu.rvlander.swarm_melee.core.model.Point;
-import eu.rvlander.swarm_melee.core.model.Team;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-public class AwtDrawableCursor implements Cursor {
+import eu.rvlander.swarm_melee.core.model.Fighter;
+import eu.rvlander.swarm_melee.core.model.Movement;
+import eu.rvlander.swarm_melee.core.model.Point;
+import eu.rvlander.swarm_melee.core.model.Team;
+
+public class AwtDrawableFighter implements Fighter {
 
     private int x;
     private int y;
-    private final AwtTeam team;
+    private AwtTeam team;
+    private int health;
 
-    public AwtDrawableCursor(final Point p, final Color c) {
+    public AwtDrawableFighter(final Point p, final Color c) {
         this.x = p.getX();
         this.y = p.getY();
         this.team = new AwtTeam(c, c.toString());
+        this.health = 100;
     }
 
     public void paintComponent(Graphics g) {
         final Graphics2D d2g = (Graphics2D) g ;
-        d2g.setStroke(new BasicStroke(10));
+        d2g.setStroke(new BasicStroke(2));
         d2g.setColor(this.team.getColor());
         d2g.draw(new Rectangle(new java.awt.Point(this.getPosition().getX(), this.getPosition().getY())));
     }
@@ -36,9 +38,23 @@ public class AwtDrawableCursor implements Cursor {
     }
 
     @Override
-    public void movePosition(Movement mov) {
+    public void move(Movement mov) {
         this.x += mov.getDeltaX();
         this.y += mov.getDeltaY();
+    }
+
+    @Override
+    public void decreaseHealth() {
+        if (this.health >= 0) {
+            this.health -= 1;
+        }
+    }
+
+    @Override
+    public void increaseHealth() {
+        if (this.health <= 100) {
+            this.health += 1;
+        }
     }
 
     @Override
@@ -46,4 +62,9 @@ public class AwtDrawableCursor implements Cursor {
         return this.team;
     }
 
+    @Override
+    public void setTeam(Team t) {
+        this.team = (AwtTeam)t;
+    }
+    
 }
