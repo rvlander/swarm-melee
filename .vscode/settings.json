@@ -1,0 +1,11 @@
+{
+  "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+  "java.format.settings.profile": "GoogleStyle",
+  "editor.defaultFormatter": "redhat.java",
+  "java.checkstyle.configuration": "/google_checks.xml",
+
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": true,
+
+}
