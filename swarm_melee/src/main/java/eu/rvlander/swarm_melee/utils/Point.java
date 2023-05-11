@@ -16,4 +16,12 @@ public class Point {
     public int getY() {
         return y;
     }
+
+    public boolean equals(Point p) {
+        return x == p.getX() && y == p.getY();
+    }
+
+    public int distance(Point p) {
+        return Math.max(Math.abs(p.getX() - x), Math.abs(p.getY() - y));
+    }
 }
