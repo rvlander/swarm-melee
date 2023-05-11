@@ -1,14 +1,16 @@
 package eu.rvlander.swarm_melee.core.engine;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Optional;
 
 import eu.rvlander.swarm_melee.core.model.Cursor;
 import eu.rvlander.swarm_melee.core.model.Fighter;
-import eu.rvlander.swarm_melee.core.model.Movement;
 import eu.rvlander.swarm_melee.core.model.PositionLookup;
 import eu.rvlander.swarm_melee.core.model.Team;
 import eu.rvlander.swarm_melee.core.model.World;
+import eu.rvlander.swarm_melee.core.model.PositionLookup.Type;
 import eu.rvlander.swarm_melee.utils.Point;
 
 public class Simulation {
@@ -48,16 +50,38 @@ public class Simulation {
             PositionsRanker positionRanker = positionsRankers.get(cursor);
             RankedPositions rankedPositions = positionRanker.rank(fighterPosition, cursorPosition, possiblePositions);
        
-            Point pickedPosition = pickMove(fighter, rankedPositions);
-            makeMove(fighter, pickedPosition);
+            Optional<Point> pickedPosition = pickMove(fighter, rankedPositions);
+
+            if(pickedPosition.isPresent()) {
+                makeMove(fighter, pickedPosition.get());
+            }
         }
         
     }
 
-    private Point pickMove(Fighter f, RankedPositions rankedPositions) {
-        // TODO
-        throw new UnsupportedOperationException("Unimplemented method 'rank'");
+    private Optional<Point> pickMove(Fighter f, RankedPositions rankedPositions) { 
+        Iterator<Point> rankedPositionsIterator = rankedPositions.iterator();
+        Optional<Point> bestEmptyPoint = Optional.empty();
+        Optional<Point> bestOpponentPoint = Optional.empty();
+        Optional<Point> bestTeamPoint = Optional.empty();
+
+        while(rankedPositionsIterator.hasNext()) {
+            Point currentPosition = rankedPositionsIterator.next();
+            PositionLookup currentLookup = this.world.lookupPosition(currentPosition);
+            if(currentLookup.type == Type.EMPTY && bestEmptyPoint.isEmpty()) {
+                bestEmptyPoint = Optional.of(currentPosition);
+            } else if(currentLookup.type == Type.FIGHTER) {
+                if(f.isOpponentOf(currentLookup.getFighter()) && bestEmptyPoint.isEmpty()) {
+                    bestOpponentPoint = Optional.of(currentPosition);
+                } else if(f.isTeammateOf(currentLookup.getFighter()) && bestEmptyPoint.isEmpty()) {
+                    bestTeamPoint = Optional.of(currentPosition);
+                }
+            }
+        }
+
+        return bestEmptyPoint.isPresent() ? bestEmptyPoint : (bestOpponentPoint.isPresent() ? bestOpponentPoint : bestTeamPoint);
     }
+
 
     private void makeMove(Fighter fighter, Point target) {
         PositionLookup lookup = this.world.lookupPosition(target);
@@ -73,6 +97,11 @@ public class Simulation {
         }
     }
 
-    private void handleFighterInteraction(Fighter movingfighter, Fighter standingFighter) {
+    private void handleFighterInteraction(Fighter movingFighter, Fighter standingFighter) {
+        if(movingFighter.isTeammateOf(standingFighter)) {
+            standingFighter.decreaseHealth();
+        } else {
+            standingFighter.increaseHealth();
+        }
     }
 }

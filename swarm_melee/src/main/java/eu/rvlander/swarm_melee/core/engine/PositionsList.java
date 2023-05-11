@@ -1,8 +1,9 @@
 package eu.rvlander.swarm_melee.core.engine;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import eu.rvlander.swarm_melee.utils.Point;
 
 public class PositionsList {
     private ArrayList<Point> positions = new ArrayList<>();
