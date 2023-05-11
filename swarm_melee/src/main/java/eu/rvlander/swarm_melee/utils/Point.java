@@ -24,4 +24,8 @@ public class Point {
     public int distance(Point p) {
         return Math.max(Math.abs(p.getX() - x), Math.abs(p.getY() - y));
     }
+
+    public Point move(int x, int y) {
+        return new Point(getX() + x, getY() + y);
+    }
 }
