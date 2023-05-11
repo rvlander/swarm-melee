@@ -39,5 +39,15 @@ public class GridMap implements Map {
     @Override
     public Iterator<Pair<Point, NeighborhoodType>> iterator() {
         return this.map.iterator();
+    }
+
+    @Override
+    public int getWidth() {
+       return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
     } 
 }
