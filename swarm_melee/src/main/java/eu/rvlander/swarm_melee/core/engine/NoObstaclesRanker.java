@@ -26,7 +26,7 @@ public class NoObstaclesRanker implements PositionsRanker {
   @Override
   public RankedPositions rank(Point origin, Point target, PositionsList possiblePositions) {
     List<Point> list = possiblePositions.asList();
-    Collections.sort(list, new PointComparator(origin));
+    Collections.sort(list, new PointComparator(target));
 
     return RankedPositions.from(list.iterator());
   }

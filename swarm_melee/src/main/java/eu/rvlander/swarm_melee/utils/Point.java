@@ -26,7 +26,8 @@ public class Point {
   }
 
   public int distance(Point p) {
-    return Math.max(Math.abs(p.getX() - x), Math.abs(p.getY() - y));
+    return (int) Math
+        .sqrt(Math.pow(Math.abs(p.getX() - x), 2) + Math.pow(Math.abs(p.getY() - y), 2));
   }
 
   public Point move(int x, int y) {
