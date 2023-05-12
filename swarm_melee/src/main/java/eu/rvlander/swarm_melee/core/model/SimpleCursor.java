@@ -6,7 +6,7 @@ public class SimpleCursor implements Cursor {
   private Point position;
   private Team team;
 
-  public SimpleCursor(Point startingPosition, Team team) {
+  public SimpleCursor(Team team, Point startingPosition) {
     position = startingPosition;
     this.team = team;
   }
@@ -27,3 +27,5 @@ public class SimpleCursor implements Cursor {
   }
 
 }
+
+

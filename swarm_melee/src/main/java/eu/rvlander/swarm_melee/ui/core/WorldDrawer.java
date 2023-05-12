@@ -8,24 +8,17 @@ import eu.rvlander.swarm_melee.core.model.World;
 public class WorldDrawer {
 
   private EntityDrawer entityDrawer;
-  private DrawingDevice drawingDevice;
   private World world;
-  private Canvas canvas;
   private ColorPalette colorPalette;
 
-  public WorldDrawer(DrawingDevice drawingDevice) {
-    this.drawingDevice = drawingDevice;
+  public WorldDrawer(World world) {
     this.entityDrawer = new SimpleEntityDrawer();
     this.world = world;
     this.colorPalette = new ColorPalette(new Color[] {Color.red(), Color.green(), Color.blue()});
   }
 
-  public void initialize() {
-    drawingDevice.initialize(world.getMap().getWidth(), world.getMap().getHeight());
-  }
 
-  public void setCavas(Canvas canvas) {
-    this.canvas = canvas;
+  public void setCanvas(Canvas canvas) {
     entityDrawer.setCanvas(canvas);
   }
 
@@ -37,7 +30,8 @@ public class WorldDrawer {
   public void drawCursors() {
     List<Cursor> cursors = world.getCursors();
     for (Cursor cursor : cursors) {
-      entityDrawer.drawCursor(cursor, colorPalette.getColor(cursor.getTeam().getId()));
+      Color color = colorPalette.getColor(cursor.getTeam().getId());
+      entityDrawer.drawCursor(cursor, color);
     }
   }
 

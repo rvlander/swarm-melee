@@ -109,4 +109,8 @@ public class Simulation {
       standingFighter.increaseHealth();
     }
   }
+
+  public World getWorld() {
+    return world;
+  }
 }

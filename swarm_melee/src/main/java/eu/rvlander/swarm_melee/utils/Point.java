@@ -10,7 +10,7 @@ public class Point {
   }
 
   public Point(Point p) {
-    new Point(p.x, p.y);
+    this(p.x, p.y);
   }
 
   public int getX() {

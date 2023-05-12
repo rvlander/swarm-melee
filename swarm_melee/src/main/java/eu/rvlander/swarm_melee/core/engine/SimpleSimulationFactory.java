@@ -25,11 +25,11 @@ public class SimpleSimulationFactory implements SimulationFactory {
 
     for (int i = 0; i < configuration.getNbCursors(); i++) {
       Team team = new Team();
-      Cursor cursor = new SimpleCursor(picker.pick(), team);
+      Cursor cursor = new SimpleCursor(team, picker.pick());
       cursors.add(cursor);
 
       for (int j = 0; j < configuration.getNbFightersByCursors(); j++) {
-        Fighter fighter = new SimpleFighter(team, piecker.pick())   
+        Fighter fighter = new SimpleFighter(team, picker.pick());
         fighters.add(fighter);
       }
 

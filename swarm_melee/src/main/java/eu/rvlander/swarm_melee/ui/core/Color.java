@@ -26,11 +26,11 @@ public class Color {
   }
 
   public Color(float r, float g, float b) {
-    new Color(r, g, b, 1);
+    this(r, g, b, 1);
   }
 
   public Color(Color c) {
-    new Color(c.r, c.g, c.b, c.a);
+    this(c.r, c.g, c.b, c.a);
   }
 
   public float getR() {

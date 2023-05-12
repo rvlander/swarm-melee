@@ -1,10 +1,10 @@
 package eu.rvlander.swarm_melee.core.engine;
 
-import java.awt.Point;
-import com.sun.tools.javac.util.List;
+import java.util.ArrayList;
+import eu.rvlander.swarm_melee.utils.Point;
 
 public class PositionPicker {
-  private List<Point> availablePositions = ArrayList<>();
+  private ArrayList<Point> availablePositions = new ArrayList<>();
 
   public PositionPicker(int width, int height) {
     populateAvailablePositions(width, height);
@@ -18,7 +18,7 @@ public class PositionPicker {
     }
   }
 
-  private Point pick() {
+  public Point pick() {
     int randIndex = (int) ((Math.random() * availablePositions.size()));
     return availablePositions.remove(randIndex);
   }
