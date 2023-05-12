@@ -33,7 +33,7 @@ public class AwtApp {
     executor.scheduleAtFixedRate(() -> {
       inputManager.poll();
       simulation.runStep();
-    }, 0, 40, TimeUnit.MILLISECONDS);
+    }, 0, 10, TimeUnit.MILLISECONDS);
     executor.scheduleAtFixedRate(drawingDevice::repaint, 0, 40, TimeUnit.MILLISECONDS);
   }
 }

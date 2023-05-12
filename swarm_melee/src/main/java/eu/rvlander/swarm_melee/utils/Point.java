@@ -25,9 +25,9 @@ public class Point {
     return x == p.getX() && y == p.getY();
   }
 
-  public int distance(Point p) {
-    return (int) Math
-        .sqrt(Math.pow(Math.abs(p.getX() - x), 2) + Math.pow(Math.abs(p.getY() - y), 2));
+  public float distance(Point p) {
+    return (int) Math.sqrt(
+        Math.pow(Math.abs(p.getX() - (float) x), 2) + Math.pow(Math.abs(p.getY() - (float) y), 2));
   }
 
   public Point move(int x, int y) {

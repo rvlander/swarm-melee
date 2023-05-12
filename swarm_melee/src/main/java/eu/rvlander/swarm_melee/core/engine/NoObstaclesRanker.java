@@ -15,10 +15,10 @@ public class NoObstaclesRanker implements PositionsRanker {
     }
 
     public int compare(Point p1, Point p2) {
-      int d1 = origin.distance(p1);
-      int d2 = origin.distance(p2);
+      float d1 = origin.distance(p1);
+      float d2 = origin.distance(p2);
 
-      return d1 - d2;
+      return (int) (d1 - d2);
     }
   }
 
