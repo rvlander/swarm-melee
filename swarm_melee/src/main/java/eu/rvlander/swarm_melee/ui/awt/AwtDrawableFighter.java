@@ -13,64 +13,65 @@ import eu.rvlander.swarm_melee.utils.Point;
 
 public class AwtDrawableFighter implements Fighter {
 
-    private int x;
-    private int y;
-    private AwtTeam team;
-    private int health;
+  private int x;
+  private int y;
+  private AwtTeam team;
+  private int health;
 
-    public AwtDrawableFighter(final Point p, final Color c) {
-        this.x = p.getX();
-        this.y = p.getY();
-        this.team = new AwtTeam(c, c.toString());
-        this.health = 100;
-    }
+  public AwtDrawableFighter(final Point p, final Color c) {
+    this.x = p.getX();
+    this.y = p.getY();
+    this.team = new AwtTeam(c, c.toString());
+    this.health = 100;
+  }
 
-    public void paintComponent(Graphics g) {
-        final Graphics2D d2g = (Graphics2D) g ;
-        d2g.setStroke(new BasicStroke(2));
-        d2g.setColor(this.team.getColor());
-        d2g.draw(new Rectangle(new java.awt.Point(this.getPosition().getX(), this.getPosition().getY())));
-    }
+  public void paintComponent(Graphics g) {
+    final Graphics2D d2g = (Graphics2D) g;
+    d2g.setStroke(new BasicStroke(2));
+    d2g.setColor(this.team.getColor());
+    d2g.draw(
+        new Rectangle(new java.awt.Point(this.getPosition().getX(), this.getPosition().getY())));
+  }
 
-    @Override
-    public Point getPosition() {
-        return new Point(this.x, this.y);
-    }
+  @Override
+  public Point getPosition() {
+    return new Point(this.x, this.y);
+  }
 
-    @Override
-    public void move(Movement mov) {
-        this.x += mov.getDeltaX();
-        this.y += mov.getDeltaY();
-    }
+  @Override
+  public void move(Movement mov) {
+    this.x += mov.getDeltaX();
+    this.y += mov.getDeltaY();
+  }
 
-    @Override
-    public void decreaseHealth() {
-        if (this.health >= 0) {
-            this.health -= 1;
-        }
+  @Override
+  public void decreaseHealth() {
+    if (this.health >= 0) {
+      this.health -= 1;
     }
+  }
 
-    @Override
-    public void increaseHealth() {
-        if (this.health <= 100) {
-            this.health += 1;
-        }
+  @Override
+  public void increaseHealth() {
+    if (this.health <= 100) {
+      this.health += 1;
     }
+  }
 
-    @Override
-    public Team getTeam() {
-        return this.team;
-    }
+  @Override
+  public Team getTeam() {
+    return this.team;
+  }
 
-    @Override
-    public void setTeam(Team t) {
-        this.team = (AwtTeam)t;
-    }
+  @Override
+  public void setTeam(Team t) {
+    this.team = (AwtTeam) t;
+  }
 
-    @Override
-    public void moveTo(Point target) {
-        this.x = target.getX();
-        this.y = target.getY();
-    }
-    
+  @Override
+  public void moveTo(Point target) {
+    this.x = target.getX();
+    this.y = target.getY();
+  }
+
 }

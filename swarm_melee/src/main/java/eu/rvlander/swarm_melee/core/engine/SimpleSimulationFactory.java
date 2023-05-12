@@ -7,20 +7,20 @@ import eu.rvlander.swarm_melee.utils.Point;
 
 public class SimpleSimulationFactory implements SimulationFactory {
 
-    @Override
-    public World createWorld() {
-        return new SimpleWord();
-    }
+  @Override
+  public World createWorld() {
+    return new SimpleWord();
+  }
 
-    @Override
-    public PositionsRanker createPositionsRanker(Map map, Point initialTarget) {
-        return new NoObstaclesRanker();
-    }
+  @Override
+  public PositionsRanker createPositionsRanker(Map map, Point initialTarget) {
+    return new NoObstaclesRanker();
+  }
 
-    @Override
-    public PositionsGenerator createPositionsGenerator(Map map) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createPositionsGenerator'");
-    }
-    
+  @Override
+  public PositionsGenerator createPositionsGenerator(Map map) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'createPositionsGenerator'");
+  }
+
 }
