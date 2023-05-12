@@ -8,6 +8,10 @@ public class Team {
     this.id = nextId++;
   }
 
+  public Team(int id) {
+    this.id = id;
+  }
+
   boolean equals(Team t) {
     return this.id == t.id;
   }

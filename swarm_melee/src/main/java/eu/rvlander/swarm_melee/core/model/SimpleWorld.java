@@ -49,6 +49,6 @@ public class SimpleWorld implements World {
   }
 
   public Cursor getCursor(Team team) {
-    return cursors.stream().filter(cursor -> cursor.getTeam() == team).findAny().orElseThrow();
+    return cursors.stream().filter(cursor -> cursor.getTeam().equals(team)).findAny().orElseThrow();
   }
 }

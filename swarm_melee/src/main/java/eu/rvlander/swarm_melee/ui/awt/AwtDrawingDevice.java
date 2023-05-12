@@ -1,14 +1,18 @@
 package eu.rvlander.swarm_melee.ui.awt;
 
+
+import eu.rvlander.swarm_melee.core.engine.SimulationCommandReceiver;
+import eu.rvlander.swarm_melee.ui.core.Color;
+import eu.rvlander.swarm_melee.ui.core.DrawingDevice;
+import eu.rvlander.swarm_melee.ui.core.WorldDrawer;
+import eu.rvlander.swarm_melee.utils.Point;
+
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import eu.rvlander.swarm_melee.ui.core.Color;
-import eu.rvlander.swarm_melee.ui.core.DrawingDevice;
-import eu.rvlander.swarm_melee.ui.core.WorldDrawer;
-import eu.rvlander.swarm_melee.utils.Point;
 
 public class AwtDrawingDevice extends JFrame implements DrawingDevice {
   private WorldDrawer drawer;

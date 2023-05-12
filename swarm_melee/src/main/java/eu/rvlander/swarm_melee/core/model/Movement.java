@@ -2,12 +2,24 @@ package eu.rvlander.swarm_melee.core.model;
 
 import eu.rvlander.swarm_melee.utils.Point;
 
-public interface Movement {
-  public Movement createMovement(int x, int y);
+public class Movement {
+  private int deltaX;
+  private int deltaY;
 
-  public int getDeltaX();
+  public Movement(int deltaX, int deltaY) {
+    this.deltaX = deltaX;
+    this.deltaY = deltaY;
+  }
 
-  public int getDeltaY();
+  public int getDeltaX() {
+    return deltaX;
+  }
 
-  public Point applyTo(Point point);
+  public int getDeltaY() {
+    return deltaY;
+  }
+
+  public Point applyTo(Point point) {
+    return point.move(deltaX, deltaY);
+  }
 }

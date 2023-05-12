@@ -10,12 +10,15 @@ public class WorldConfiguration {
   private int nbFightersByCursors;
   private int width;
   private int height;
+  private int cursorSpeed;
 
-  public WorldConfiguration(int nbCursors, int nbFightersByCusrors, int width, int height) {
+  public WorldConfiguration(int nbCursors, int nbFightersByCursors, int width, int height,
+      int cursorSpeed) {
     this.nbCursors = nbCursors;
-    this.nbFightersByCursors = nbFightersByCusrors;
+    this.nbFightersByCursors = nbFightersByCursors;
     this.width = width;
     this.height = height;
+    this.cursorSpeed = cursorSpeed;
   }
 
   public int getNbCursors() {
@@ -32,5 +35,9 @@ public class WorldConfiguration {
 
   public int getHeight() {
     return height;
+  }
+
+  public int getCursorSpeed() {
+    return cursorSpeed;
   }
 }

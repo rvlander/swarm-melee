@@ -1,5 +1,6 @@
 package eu.rvlander.swarm_melee.core.engine;
 
+import java.lang.module.Configuration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -7,17 +8,19 @@ import java.util.Optional;
 
 import eu.rvlander.swarm_melee.core.model.Cursor;
 import eu.rvlander.swarm_melee.core.model.Fighter;
+import eu.rvlander.swarm_melee.core.model.Movement;
 import eu.rvlander.swarm_melee.core.model.PositionLookup;
 import eu.rvlander.swarm_melee.core.model.Team;
 import eu.rvlander.swarm_melee.core.model.World;
 import eu.rvlander.swarm_melee.core.model.PositionLookup.Type;
 import eu.rvlander.swarm_melee.utils.Point;
 
-public class Simulation {
+public class Simulation implements SimulationCommandReceiver {
   private final SimulationFactory factory;
   private World world;
   private Map<Cursor, PositionsRanker> positionsRankers;
   private PositionsGenerator positionsGenerator;
+  private WorldConfiguration worldConfiguration;
 
   public Simulation(SimulationFactory simulationFactory, WorldConfiguration worldConfiguration) {
     this.factory = simulationFactory;
@@ -25,6 +28,7 @@ public class Simulation {
   }
 
   public void reinitialize(WorldConfiguration configuration) {
+    this.worldConfiguration = configuration;
     world = factory.createWorld(configuration);
     positionsGenerator = factory.createPositionsGenerator(world.getMap());
     initializePositionsRankers();
@@ -112,5 +116,29 @@ public class Simulation {
 
   public World getWorld() {
     return world;
+  }
+
+  @Override
+  public void teamInputLeft(Team t) {
+    Cursor cursor = world.getCursor(t);
+    cursor.movePosition(new Movement(-worldConfiguration.getCursorSpeed(), 0));
+  }
+
+  @Override
+  public void teamInputUp(Team t) {
+    Cursor cursor = world.getCursor(t);
+    cursor.movePosition(new Movement(0, worldConfiguration.getCursorSpeed()));
+  }
+
+  @Override
+  public void teamInputRight(Team t) {
+    Cursor cursor = world.getCursor(t);
+    cursor.movePosition(new Movement(worldConfiguration.getCursorSpeed(), 0));
+  }
+
+  @Override
+  public void teamInputDown(Team t) {
+    Cursor cursor = world.getCursor(t);
+    cursor.movePosition(new Movement(0, -worldConfiguration.getCursorSpeed()));
   }
 }

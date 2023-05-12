@@ -18,7 +18,7 @@ public class SimpleCursor implements Cursor {
 
   @Override
   public void movePosition(Movement mov) {
-    position.move(mov.getDeltaX(), mov.getDeltaY());
+    position = position.move(mov.getDeltaX(), mov.getDeltaY());
   }
 
   @Override
