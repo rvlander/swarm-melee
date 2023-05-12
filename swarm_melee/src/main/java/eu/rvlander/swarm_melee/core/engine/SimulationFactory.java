@@ -5,7 +5,7 @@ import eu.rvlander.swarm_melee.core.model.World;
 import eu.rvlander.swarm_melee.utils.Point;
 
 public interface SimulationFactory {
-  public World createWorld();
+  public World createWorld(WorldConfiguration configuration);
 
   public PositionsRanker createPositionsRanker(Map map, Point initialTarget);
 

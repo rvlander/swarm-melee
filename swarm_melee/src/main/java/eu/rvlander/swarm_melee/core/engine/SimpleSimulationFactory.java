@@ -1,15 +1,25 @@
 package eu.rvlander.swarm_melee.core.engine;
 
+import eu.rvlander.swarm_melee.core.model.Cursor;
+import eu.rvlander.swarm_melee.core.model.Fighter;
+import eu.rvlander.swarm_melee.core.model.GridMap;
 import eu.rvlander.swarm_melee.core.model.Map;
-import eu.rvlander.swarm_melee.core.model.SimpleWord;
+import eu.rvlander.swarm_melee.core.model.SimpleWorld;
 import eu.rvlander.swarm_melee.core.model.World;
 import eu.rvlander.swarm_melee.utils.Point;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SimpleSimulationFactory implements SimulationFactory {
 
   @Override
-  public World createWorld() {
-    return new SimpleWord();
+  public World createWorld(WorldConfiguration configuration) {
+    Map map = new GridMap(configuration.getWidth(), configuration.getHeight());
+    List<Fighter> fighters = new ArrayList<>();
+    List<Cursor> cursors = new ArrayList<>();
+
+    return new SimpleWorld(map, cursors, fighters);
   }
 
   @Override
@@ -19,8 +29,7 @@ public class SimpleSimulationFactory implements SimulationFactory {
 
   @Override
   public PositionsGenerator createPositionsGenerator(Map map) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'createPositionsGenerator'");
+    return new SimplePositionsGenerator(map);
   }
 
 }

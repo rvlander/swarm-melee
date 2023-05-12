@@ -13,6 +13,8 @@ public abstract class Fighter {
 
   public abstract void increaseHealth();
 
+  public abstract float getHealthProportion();
+
   public abstract Team getTeam();
 
   public abstract void setTeam(Team team);

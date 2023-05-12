@@ -19,14 +19,14 @@ public class Simulation {
   private Map<Cursor, PositionsRanker> positionsRankers;
   private PositionsGenerator positionsGenerator;
 
-  public Simulation(SimulationFactory simulationFactory) {
+  public Simulation(SimulationFactory simulationFactory, WorldConfiguration worldConfiguration) {
     this.factory = simulationFactory;
-    reinitialize();
+    reinitialize(worldConfiguration);
   }
 
-  public void reinitialize() {
-    world = factory.createWorld();
-    positionsGenerator = factory.createPositionsGenerator();
+  public void reinitialize(WorldConfiguration configuration) {
+    world = factory.createWorld(configuration);
+    positionsGenerator = factory.createPositionsGenerator(world.getMap());
     initializePositionsRankers();
   }
 
@@ -81,8 +81,10 @@ public class Simulation {
       }
     }
 
-    return bestEmptyPoint.isPresent() ? bestEmptyPoint
-        : (bestOpponentPoint.isPresent() ? bestOpponentPoint : bestTeamPoint);
+    Optional<Point> nonEmptyPoint =
+        bestOpponentPoint.isPresent() ? bestOpponentPoint : bestTeamPoint;
+
+    return bestEmptyPoint.isPresent() ? bestEmptyPoint : nonEmptyPoint;
   }
 
 

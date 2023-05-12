@@ -8,15 +8,21 @@ public class WorldDrawer {
   private DrawingDevice drawingDevice;
   private World world;
 
-  public WorldDrawer(EntityDrawer entityDrawer, DrawingDevice drawingDevice) {
-    this.entityDrawer = entityDrawer;
+  public WorldDrawer(DrawingDevice drawingDevice) {
     this.drawingDevice = drawingDevice;
+    this.entityDrawer = new SimpleEntityDrawer(drawingDevice);
     this.world = world;
   }
 
-  private void initialize() {
+  public void initialize() {
     drawingDevice.initialize(world.getMap().getWidth(), world.getMap().getHeight());
   }
 
-  public void draw();
+  public void draw() {
+
+  }
+
+  public void drawCursors() {
+
+  }
 }
