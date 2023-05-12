@@ -14,7 +14,7 @@ public class GridMap implements Map {
   public GridMap(int width, int height) {
     this.width = width;
     this.height = height;
-    this.map = new Grid<>(width, height);
+    this.map = new Grid<>(width, height, () -> NeighborhoodType.NONE);
   }
 
   @Override

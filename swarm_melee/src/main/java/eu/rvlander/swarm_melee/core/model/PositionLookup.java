@@ -13,7 +13,7 @@ public class PositionLookup {
   }
 
   public static PositionLookup Empty() {
-    return new PositionLookup(Type.FIGHTER);
+    return new PositionLookup(Type.EMPTY);
   }
 
   private PositionLookup(Type type) {

@@ -52,4 +52,8 @@ public class Color {
   public Color darken(float percentage) {
     return new Color(r * percentage, g * percentage, b * percentage, a);
   }
+
+  public Color opacity(float opacity) {
+    return new Color(r, g, b, opacity);
+  }
 }

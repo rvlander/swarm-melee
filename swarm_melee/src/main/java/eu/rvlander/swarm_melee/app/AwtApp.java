@@ -14,7 +14,7 @@ public class AwtApp {
   public static void main(String args[]) {
 
 
-    WorldConfiguration configuration = new WorldConfiguration(1, 20, 400, 400);
+    WorldConfiguration configuration = new WorldConfiguration(2, 200, 400, 400);
 
     final Simulation simulation = new Simulation(new SimpleSimulationFactory(), configuration);
 
