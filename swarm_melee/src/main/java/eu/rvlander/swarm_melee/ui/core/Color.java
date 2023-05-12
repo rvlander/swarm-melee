@@ -6,6 +6,18 @@ public class Color {
   private float b;
   private float a;
 
+  public static Color red() {
+    return new Color(1, 0, 0);
+  }
+
+  public static Color green() {
+    return new Color(0, 1, 0);
+  }
+
+  public static Color blue() {
+    return new Color(0, 0, 1);
+  }
+
   public Color(float r, float g, float b, float a) {
     this.r = r;
     this.g = g;
@@ -15,6 +27,10 @@ public class Color {
 
   public Color(float r, float g, float b) {
     new Color(r, g, b, 1);
+  }
+
+  public Color(Color c) {
+    new Color(c.r, c.g, c.b, c.a);
   }
 
   public float getR() {

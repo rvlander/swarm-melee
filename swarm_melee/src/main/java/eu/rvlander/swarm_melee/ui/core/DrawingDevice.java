@@ -6,8 +6,6 @@ public interface DrawingDevice {
 
   public void initialize(int width, int height);
 
-  public void drawFilledSquare(Point center, int size, Color color);
 
-  public void drawFilledCircle(Point center, int radius, Color color);
 
 }

@@ -4,10 +4,11 @@ import eu.rvlander.swarm_melee.core.model.Cursor;
 import eu.rvlander.swarm_melee.core.model.Fighter;
 
 public abstract class EntityDrawer {
-  protected DrawingDevice drawingDevice;
+  protected Canvas canvas;
 
-  protected EntityDrawer(DrawingDevice dd) {
-    drawingDevice = dd;
+
+  public void setCanvas(Canvas canvas) {
+    this.canvas = canvas;
   }
 
   public abstract void drawCursor(Cursor cursor, Color color);

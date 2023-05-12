@@ -104,7 +104,7 @@ public class Simulation {
 
   private void handleFighterInteraction(Fighter movingFighter, Fighter standingFighter) {
     if (movingFighter.isTeammateOf(standingFighter)) {
-      standingFighter.decreaseHealth();
+      standingFighter.decreaseHealth(movingFighter.getTeam());
     } else {
       standingFighter.increaseHealth();
     }

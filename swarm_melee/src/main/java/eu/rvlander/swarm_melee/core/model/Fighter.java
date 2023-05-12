@@ -9,7 +9,7 @@ public abstract class Fighter {
 
   public abstract void moveTo(Point target);
 
-  public abstract void decreaseHealth();
+  public abstract void decreaseHealth(Team attackerTeam);
 
   public abstract void increaseHealth();
 
