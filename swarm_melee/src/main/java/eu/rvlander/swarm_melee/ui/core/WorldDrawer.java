@@ -23,8 +23,8 @@ public class WorldDrawer {
   }
 
   public void draw() {
-    drawCursors();
     drawFighters();
+    drawCursors();
   }
 
   public void drawCursors() {

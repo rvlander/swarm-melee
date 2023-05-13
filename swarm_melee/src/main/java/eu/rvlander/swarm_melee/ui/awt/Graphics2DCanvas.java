@@ -4,6 +4,7 @@ import eu.rvlander.swarm_melee.ui.core.Canvas;
 import eu.rvlander.swarm_melee.ui.core.Color;
 import eu.rvlander.swarm_melee.utils.CoordinateConvertor;
 import eu.rvlander.swarm_melee.utils.Point;
+import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 
 
@@ -35,6 +36,16 @@ public class Graphics2DCanvas implements Canvas {
     int convertedRadius = convertor.convertDistance(radius);
     g.setColor(colorToAwtColor(color));
     g.fillOval(convertedCenter.getX() - convertedRadius / 2,
+        convertedCenter.getY() - convertedRadius / 2, convertedRadius, convertedRadius);
+  }
+
+  @Override
+  public void drawCircle(Point center, int radius, Color color) {
+    Point convertedCenter = convertor.convertPoint(center);
+    int convertedRadius = radius;
+    g.setStroke(new BasicStroke(5));
+    g.setColor(colorToAwtColor(color));
+    g.drawOval(convertedCenter.getX() - convertedRadius / 2,
         convertedCenter.getY() - convertedRadius / 2, convertedRadius, convertedRadius);
   }
 

@@ -6,7 +6,7 @@ import eu.rvlander.swarm_melee.core.model.Fighter;
 public class SimpleEntityDrawer extends EntityDrawer {
   @Override
   public void drawCursor(Cursor cursor, Color color) {
-    canvas.drawFilledCircle(cursor.getPosition(), 20, color.opacity(0.5f));
+    canvas.drawCircle(cursor.getPosition(), 20, color.darken(0.8f));
   }
 
   @Override
