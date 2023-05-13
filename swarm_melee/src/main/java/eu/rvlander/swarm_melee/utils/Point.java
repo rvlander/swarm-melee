@@ -33,4 +33,20 @@ public class Point {
   public Point move(int x, int y) {
     return new Point(getX() + x, getY() + y);
   }
+
+  public Point add(Point p) {
+    return new Point(x + p.x, y + p.y);
+  }
+
+  public Point minus(Point p) {
+    return new Point(x - p.x, y - p.y);
+  }
+
+  public Point scale(float s) {
+    return scale(s, s);
+  }
+
+  public Point scale(float scalerX, float scalerY) {
+    return new Point((int) (x * scalerX), (int) (y * scalerY));
+  }
 }

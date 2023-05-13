@@ -41,4 +41,12 @@ public class WorldDrawer {
       entityDrawer.drawFighter(fighter, colorPalette.getColor(fighter.getTeam().getId()));
     }
   }
+
+  public int getWidth() {
+    return this.world.getMap().getWidth();
+  }
+
+  public int getHeight() {
+    return this.world.getMap().getHeight();
+  }
 }

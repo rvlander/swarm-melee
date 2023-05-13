@@ -2,15 +2,18 @@ package eu.rvlander.swarm_melee.ui.awt;
 
 import eu.rvlander.swarm_melee.ui.core.Canvas;
 import eu.rvlander.swarm_melee.ui.core.Color;
+import eu.rvlander.swarm_melee.utils.CoordinateConvertor;
 import eu.rvlander.swarm_melee.utils.Point;
 import java.awt.Graphics2D;
 
 
 public class Graphics2DCanvas implements Canvas {
   private Graphics2D g;
+  private CoordinateConvertor convertor;
 
-  public Graphics2DCanvas(Graphics2D g) {
+  public Graphics2DCanvas(Graphics2D g, CoordinateConvertor convertor) {
     this.g = g;
+    this.convertor = convertor;
   }
 
   private static java.awt.Color colorToAwtColor(Color c) {
@@ -19,14 +22,20 @@ public class Graphics2DCanvas implements Canvas {
 
   @Override
   public void drawFilledSquare(Point center, int size, Color color) {
+    Point convertedCenter = convertor.convertPoint(center);
+    int convertedSize = convertor.convertDistance(size);
     g.setColor(colorToAwtColor(color));
-    g.fillRect(center.getX() - size / 2, center.getY() - size / 2, size, size);
+    g.fillRect(convertedCenter.getX() - convertedSize / 2,
+        convertedCenter.getY() - convertedSize / 2, convertedSize, convertedSize);
   }
 
   @Override
   public void drawFilledCircle(Point center, int radius, Color color) {
+    Point convertedCenter = convertor.convertPoint(center);
+    int convertedRadius = convertor.convertDistance(radius);
     g.setColor(colorToAwtColor(color));
-    g.fillOval(center.getX() - radius / 2, center.getY() - radius / 2, radius, radius);
+    g.fillOval(convertedCenter.getX() - convertedRadius / 2,
+        convertedCenter.getY() - convertedRadius / 2, convertedRadius, convertedRadius);
   }
 
 
