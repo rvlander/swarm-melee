@@ -118,27 +118,32 @@ public class Simulation implements SimulationCommandReceiver {
     return world;
   }
 
+
   @Override
   public void teamInputLeft(Team t) {
-    Cursor cursor = world.getCursor(t);
-    cursor.movePosition(new Movement(-worldConfiguration.getCursorSpeed(), 0));
+    moveTeamCursorOf(t, -worldConfiguration.getCursorSpeed(), 0);
   }
 
   @Override
   public void teamInputUp(Team t) {
-    Cursor cursor = world.getCursor(t);
-    cursor.movePosition(new Movement(0, worldConfiguration.getCursorSpeed()));
+    moveTeamCursorOf(t, 0, worldConfiguration.getCursorSpeed());
   }
 
   @Override
   public void teamInputRight(Team t) {
-    Cursor cursor = world.getCursor(t);
-    cursor.movePosition(new Movement(worldConfiguration.getCursorSpeed(), 0));
+    moveTeamCursorOf(t, worldConfiguration.getCursorSpeed(), 0);
   }
 
   @Override
   public void teamInputDown(Team t) {
-    Cursor cursor = world.getCursor(t);
-    cursor.movePosition(new Movement(0, -worldConfiguration.getCursorSpeed()));
+    moveTeamCursorOf(t, 0, -worldConfiguration.getCursorSpeed());
   }
+
+  private void moveTeamCursorOf(Team t, int deltaX, int deltaY) {
+    Cursor cursor = world.getCursor(t);
+    Point newPosition = cursor.getPosition().add(new Point(deltaX, deltaY)).clip(0, 0,
+        worldConfiguration.getWidth(), worldConfiguration.getHeight());
+    cursor.moveTo(newPosition);
+  }
+
 }

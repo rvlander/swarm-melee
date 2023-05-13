@@ -49,4 +49,8 @@ public class Point {
   public Point scale(float scalerX, float scalerY) {
     return new Point((int) (x * scalerX), (int) (y * scalerY));
   }
+
+  public Point clip(int minX, int minY, int maxX, int maxY) {
+    return new Point(Math.max(minX, Math.min(maxX, x)), Math.max(minY, Math.min(maxY, y)));
+  }
 }

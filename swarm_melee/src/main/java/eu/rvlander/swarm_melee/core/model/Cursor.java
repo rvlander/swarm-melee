@@ -5,7 +5,7 @@ import eu.rvlander.swarm_melee.utils.Point;
 public interface Cursor {
   public Point getPosition();
 
-  public void movePosition(Movement mov);
+  public void moveTo(Point p);
 
   public Team getTeam();
 }
