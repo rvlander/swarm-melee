@@ -11,6 +11,6 @@ public class SimpleEntityDrawer extends EntityDrawer {
 
   @Override
   public void drawFighter(Fighter fighter, Color color) {
-    canvas.drawFilledSquare(fighter.getPosition(), 2, color.darken(fighter.getHealthProportion()));
+    canvas.drawFilledSquare(fighter.getPosition(), 3, color.darken(fighter.getHealthProportion()));
   }
 }

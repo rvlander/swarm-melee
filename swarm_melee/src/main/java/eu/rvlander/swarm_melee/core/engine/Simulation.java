@@ -96,7 +96,7 @@ public class Simulation implements SimulationCommandReceiver {
     PositionLookup lookup = this.world.lookupPosition(target);
     switch (lookup.type) {
       case EMPTY:
-        fighter.moveTo(target);
+        this.world.moveFighterTo(fighter, target);
         break;
       case FIGHTER:
         handleFighterInteraction(fighter, lookup.getFighter());

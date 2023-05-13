@@ -15,7 +15,7 @@ public class AwtApp {
   public static void main(String args[]) {
 
 
-    WorldConfiguration configuration = new WorldConfiguration(2, 500, 400, 400, 4);
+    WorldConfiguration configuration = new WorldConfiguration(2, 10000, 600, 600, 3);
 
     final Simulation simulation = new Simulation(new SimpleSimulationFactory(), configuration);
 
@@ -34,6 +34,6 @@ public class AwtApp {
       inputManager.poll();
       simulation.runStep();
     }, 0, 10, TimeUnit.MILLISECONDS);
-    executor.scheduleAtFixedRate(drawingDevice::repaint, 0, 40, TimeUnit.MILLISECONDS);
+    executor.scheduleAtFixedRate(drawingDevice::repaint, 0, 20, TimeUnit.MILLISECONDS);
   }
 }

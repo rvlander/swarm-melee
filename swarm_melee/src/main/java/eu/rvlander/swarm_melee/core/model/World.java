@@ -11,6 +11,8 @@ public interface World {
 
   public List<Fighter> getFighters();
 
+  public void moveFighterTo(Fighter f, Point newPosition);
+
   public Cursor getCursor(Team team);
 
   public PositionLookup lookupPosition(Point position);

@@ -21,7 +21,12 @@ public class Point {
     return y;
   }
 
-  public boolean equals(Point p) {
+  @Override
+  public boolean equals(Object o) {
+    if (!(o instanceof Point)) {
+      return false;
+    }
+    Point p = (Point) o;
     return x == p.getX() && y == p.getY();
   }
 
@@ -52,5 +57,11 @@ public class Point {
 
   public Point clip(int minX, int minY, int maxX, int maxY) {
     return new Point(Math.max(minX, Math.min(maxX, x)), Math.max(minY, Math.min(maxY, y)));
+  }
+
+  @Override
+  public int hashCode() {
+    // see Pairing function Wikipedia
+    return (x + y) * (x + y + 1) / 2 + y;
   }
 }
