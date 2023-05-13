@@ -16,6 +16,10 @@ import eu.rvlander.swarm_melee.core.model.PositionLookup.Type;
 import eu.rvlander.swarm_melee.utils.Point;
 
 public class Simulation implements SimulationCommandReceiver {
+  public static final int GOOD_POSITION_CUT = 3;
+  public static final int BAD_POSITION_CUT = 6;
+
+
   private final SimulationFactory factory;
   private World world;
   private Map<Cursor, PositionsRanker> positionsRankers;
@@ -71,15 +75,19 @@ public class Simulation implements SimulationCommandReceiver {
     Optional<Point> bestOpponentPoint = Optional.empty();
     Optional<Point> bestTeamPoint = Optional.empty();
 
+    int positionRank = 0;
     while (rankedPositionsIterator.hasNext()) {
+      positionRank++;
       Point currentPosition = rankedPositionsIterator.next();
       PositionLookup currentLookup = this.world.lookupPosition(currentPosition);
       if (currentLookup.type == Type.EMPTY && bestEmptyPoint.isEmpty()) {
         bestEmptyPoint = Optional.of(currentPosition);
       } else if (currentLookup.type == Type.FIGHTER) {
-        if (f.isOpponentOf(currentLookup.getFighter()) && bestEmptyPoint.isEmpty()) {
+        if (f.isOpponentOf(currentLookup.getFighter()) && bestEmptyPoint.isEmpty()
+            && positionRank < GOOD_POSITION_CUT) {
           bestOpponentPoint = Optional.of(currentPosition);
-        } else if (f.isTeammateOf(currentLookup.getFighter()) && bestEmptyPoint.isEmpty()) {
+        } else if (f.isTeammateOf(currentLookup.getFighter()) && bestEmptyPoint.isEmpty()
+            && positionRank < BAD_POSITION_CUT) {
           bestTeamPoint = Optional.of(currentPosition);
         }
       }
