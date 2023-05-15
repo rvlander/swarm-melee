@@ -5,3 +5,5 @@
 plugins {
     id 'eu.rvlander.swarm_melee.java-library-conventions'
 }
+
+group = 'eu.rvlander.swarm_melee'
