@@ -31,6 +31,15 @@ public class Graphics2DCanvas implements Canvas {
   }
 
   @Override
+  public void drawFilledRectangle(Point bottomLeft, Point topRight, Color color) {
+    Point bL = convertor.convertPoint(bottomLeft);
+    Point tR = convertor.convertPoint(topRight);
+    g.setColor(colorToAwtColor(color));
+    g.fillRect(bL.getX(),
+            bL.getY(), tR.getX()-bL.getX(), tR.getY()-bL.getY());
+  }
+
+  @Override
   public void drawFilledCircle(Point center, int radius, Color color) {
     Point convertedCenter = convertor.convertPoint(center);
     int convertedRadius = convertor.convertDistance(radius);

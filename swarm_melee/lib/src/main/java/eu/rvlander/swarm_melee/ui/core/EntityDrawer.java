@@ -11,6 +11,8 @@ public abstract class EntityDrawer {
     this.canvas = canvas;
   }
 
+  public abstract void drawBackGround(int w, int h, Color color);
+
   public abstract void drawCursor(Cursor cursor, Color color);
 
   public abstract void drawFighter(Fighter fighters, Color color);

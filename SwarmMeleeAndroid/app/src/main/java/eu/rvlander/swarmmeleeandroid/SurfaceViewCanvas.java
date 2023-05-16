@@ -36,6 +36,19 @@ public class SurfaceViewCanvas implements Canvas {
     }
 
     @Override
+    public void drawFilledRectangle(Point bottomLeft, Point topRight, Color color) {
+        Point bL = convertor.convertPoint(bottomLeft);
+        Point tR = convertor.convertPoint(topRight);
+
+        Paint p = new Paint();
+        p.setStyle(Paint.Style.FILL);
+        setPaintColor(p, color);
+        canvas.drawRect(bL.getX(),
+                tR.getY(),  tR.getX(),
+                bL.getY(), p);
+    }
+
+    @Override
     public void drawFilledCircle(Point center, int radius, Color color) {
         Point convertedCenter = convertor.convertPoint(center);
         int convertedRadius = convertor.convertDistance(radius);

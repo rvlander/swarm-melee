@@ -29,27 +29,25 @@ class MainActivity : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
 
-        val configuration = WorldConfiguration(2, 1000, 600, 600, 3)
+        val configuration = WorldConfiguration(1, 1000, 600, 600, 3)
         val simulation = Simulation(SimpleSimulationFactory(), configuration)
 
         val worldDrawer = WorldDrawer(simulation.world)
-        val drawingDevice = SurfaceViewDrawingDevice(this,worldDrawer)
+        val inputManager = SurfaceInputManager();
+        inputManager.setCursorList(simulation.world.cursors)
+        val drawingDevice = SurfaceViewDrawingDevice(this,worldDrawer, inputManager)
         drawingDevice.initialize(configuration.width, configuration.height)
+
+        inputManager.setSimulationCommandReceiver(simulation);
 
 
         val rootLayout = findViewById<View>(R.id.root) as ConstraintLayout
-        val playControlsPanelMinimized = View(this)
-        rootLayout?.addView(drawingDevice)
-
-
-        /* val inputManager = AwtKeyListener()
-        inputManager.setSimulationCommandReceiver(simulation)
-        drawingDevice.addKeyListener(inputManager) */
+        rootLayout.addView(drawingDevice)
 
 
         val executor = ScheduledThreadPoolExecutor(2)
         executor.scheduleAtFixedRate({
-            // inputManager.poll()
+            inputManager.poll()
             simulation.runStep()
         }, 0, 50, TimeUnit.MILLISECONDS)
         executor.scheduleAtFixedRate({ drawingDevice.invalidate() }, 0, 100, TimeUnit.MILLISECONDS)
@@ -60,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         if (actionBar != null) actionBar.hide()
 
         val windowInsetsController =
-            WindowCompat.getInsetsController(window, window.decorView) ?: return
+            WindowCompat.getInsetsController(window, window.decorView)
         windowInsetsController.systemBarsBehavior =
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())

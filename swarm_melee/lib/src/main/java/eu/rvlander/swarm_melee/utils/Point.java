@@ -1,5 +1,7 @@
 package eu.rvlander.swarm_melee.utils;
 
+import java.util.Objects;
+
 public class Point {
   private int x;
   private int y;
@@ -19,15 +21,6 @@ public class Point {
 
   public int getY() {
     return y;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (!(o instanceof Point)) {
-      return false;
-    }
-    Point p = (Point) o;
-    return x == p.getX() && y == p.getY();
   }
 
   public float distance(Point p) {
@@ -60,8 +53,15 @@ public class Point {
   }
 
   @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Point point = (Point) o;
+    return x == point.x && y == point.y;
+  }
+
+  @Override
   public int hashCode() {
-    // see Pairing function Wikipedia
-    return (x + y) * (x + y + 1) / 2 + y;
+    return Objects.hash(x, y);
   }
 }

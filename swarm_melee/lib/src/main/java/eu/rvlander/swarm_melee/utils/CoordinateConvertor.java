@@ -44,6 +44,10 @@ public class CoordinateConvertor {
     return point.minus(sourceOrigin).scale(signX * scaler, signY * scaler).add(targetOrigin);
   }
 
+  public Point revertPoint(Point point) {
+    return point.minus(targetOrigin).scale(signX/scaler, signY/ scaler).add(sourceOrigin);
+  }
+
   public int convertDistance(int distance) {
     return (int) (distance * scaler);
   }

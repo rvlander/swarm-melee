@@ -3,11 +3,13 @@ package eu.rvlander.swarm_melee.ui.awt;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Map.Entry;
 import eu.rvlander.swarm_melee.core.engine.SimulationCommandEmitter;
 import eu.rvlander.swarm_melee.core.engine.SimulationCommandReceiver;
+import eu.rvlander.swarm_melee.core.model.Cursor;
 import eu.rvlander.swarm_melee.core.model.Team;
 
 
@@ -27,6 +29,7 @@ public class AwtKeyListener implements KeyListener, SimulationCommandEmitter {
   private final Map<Integer, Boolean> keyPressed = new HashMap<>();
   private Optional<SimulationCommandReceiver> receiver = Optional.empty();
 
+  @Override
   public void poll() {
     if (receiver.isPresent()) {
       SimulationCommandReceiver someReceiver = receiver.orElseThrow();
@@ -129,6 +132,11 @@ public class AwtKeyListener implements KeyListener, SimulationCommandEmitter {
   @Override
   public void setSimulationCommandReceiver(SimulationCommandReceiver receiver) {
     this.receiver = Optional.of(receiver);
+  }
+
+  @Override
+  public void setCursorList(List<Cursor> cursorList) {
+    // do nothing
   }
 
 }

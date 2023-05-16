@@ -23,6 +23,7 @@ public class WorldDrawer {
   }
 
   public void draw() {
+    this.entityDrawer.drawBackGround(getWidth(), getHeight(), Color.white());
     drawFighters();
     drawCursors();
   }
