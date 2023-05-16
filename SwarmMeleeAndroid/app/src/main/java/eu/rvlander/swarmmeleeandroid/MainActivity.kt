@@ -28,8 +28,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
-
-        val configuration = WorldConfiguration(1, 1000, 600, 600, 3)
+        val configuration = WorldConfiguration(2, 1000, 300, 300, 3)
         val simulation = Simulation(SimpleSimulationFactory(), configuration)
 
         val worldDrawer = WorldDrawer(simulation.world)
